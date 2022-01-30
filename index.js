@@ -92,7 +92,7 @@ let subFunction = (e) => {
                 goodLetters++
             }
         }
-        ole.log(containerWord[i]);
+        console.log(containerWord[i]);
     }
 
     if (goodLetters == numberOfChildren) {

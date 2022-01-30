@@ -1,37 +1,118 @@
-let listWords = ["parent" ,  "ananas" , "talk" , "elephant" , "computer"] 
+let listWords = ["parent", "ananas", "talk", "elephant", "computer"]
 let wordToFind = listWords[Math.floor(Math.random() * listWords.length)]
-console.log(wordToFind);
+let form = document.querySelector('form')
+    //console.log(wordToFind);
 let sizeOfTheWord = wordToFind.length;
-let containerWord = document.querySelector("#flex-container") ;
-let containerCardsToMove = document.querySelector("#flex-container2") ;
-let RandomLetters = new Array()
+let containerWord = document.querySelector("#flex-container");
+let containerCardsToMove = document.querySelector("#flex-container2");
+let errorDiv = document.querySelector("#flex-container4");
 let wordTemp = wordToFind;
-let rand
 
-let arrangeTheCards = ()=>{
-    for(index in wordToFind) {
-        console.log(wordToFind[index]);
-    
+let shuffled = wordTemp.split('').sort(function() { return 0.5 - Math.random() }).join('');
+
+let handleDragStart = (e) => {
+    // console.log("drag");
+    e.dataTransfer.setData("text/plain", e.target.id);
+}
+let handleDragOver = (e) => {
+
+    e.preventDefault();
+
+}
+let reload = () => { window.location = "./game.html" }
+
+let handleDrop = (e) => {
+    // console.log("Drop");
+    e.preventDefault();
+    // Get the data, which is the id of the drop target
+    let data = e.dataTransfer.getData("text");
+    //move the elem on the destination 
+    //console.log("#" + data);
+    //console.log(document.querySelector("#" + data));
+    e.target.appendChild(document.querySelector("#" + data));
+    // Clear the drag data cache (for all formats/types)
+    e.dataTransfer.clearData();
+}
+
+let arrangeTheCards = () => {
+    for (index in wordToFind) {
+        // console.log(wordToFind[index]);
+
         let myDiv = document.createElement("div");
+        myDiv.setAttribute("id", `destinationItem${index}`);
+        myDiv.style.zIndex = "10";
         let myP = document.createElement("p");
+        myP.style.display = "none"
         myP.innerHTML = wordToFind[index]
         myDiv.appendChild(myP);
-    
+
         let myDiv2 = document.createElement("div");
+        myDiv2.draggable = true;
+
+        myDiv2.setAttribute("id", `draggableItem${index}`);
+        myDiv2.style.zIndex = "100";
         let myP2 = document.createElement("p");
         myP2.innerHTML = shuffled[index]
         myDiv2.appendChild(myP2);
-     
-    
+
+
         containerWord.appendChild(myDiv)
         containerCardsToMove.appendChild(myDiv2)
-        
-    };}
 
-let shuffled = wordTemp.split('').sort(function(){return 0.5-Math.random()}).join('');
+        myDiv2.addEventListener('dragstart', handleDragStart);
+        myDiv.addEventListener('dragover', handleDragOver);
+        myDiv.addEventListener('drop', handleDrop);
+
+    };
+}
+let errorMessage = (msg) => {
+
+    let div = document.createElement("div");
+    let P = document.createElement("p");
+    P.innerHTML = "error please click reload"
+    div.appendChild(P);
+    errorDiv.appendChild(div);
+}
+
+let subFunction = (e) => {
+    e.preventDefault();
+    console.log(containerWord);
+    let numberOfChildren = containerWord.childElementCount;
+    let childrenOfContainerWord = containerWord.childNodes;
+    let childrenOfChild = new Array();
+    console.log(childrenOfContainerWord)
+    childrenOfContainerWord
+    for (i = 1; i < numberOfChildren + 1; i++) {
+        console.log(childrenOfContainerWord[i]);
+        if (childrenOfContainerWord[i].childElementCount != 2) {
+            errorMessage("error");
+            break;
+        } else {
+            childrenOfChild = childrenOfContainerWord[i].childNodes;
+            console.log(childrenOfChild);
+            if (childrenOfChild[0].textContent != childrenOfChild[1].firstChild.textContent) {
+                errorMessage("badLetters");
+                break;
+            } else {
+                let div = document.createElement("div");
+                let P = document.createElement("p");
+                P.innerHTML = "congratulation you win"
+                div.appendChild(P);
+                errorDiv.appendChild(div);
+                break;
+            }
+        }
+
+        //childrenOfChild.push(containerWord[i].childNodes)
+        //console.log(containerWord[i]);
+    }
+
+
+
+}
+
+let mySubmit = form.addEventListener('submit', subFunction)
+
+
 
 arrangeTheCards();
-
-
-
-

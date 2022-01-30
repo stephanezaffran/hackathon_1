@@ -1,6 +1,8 @@
-
-#flex-container, #flex-container2 {
-    position : relative;
+#flex-container,
+#flex-container2,
+#flex-container3,
+#flex-container4 {
+    position: relative;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -8,23 +10,55 @@
     justify-content: space-around;
     height: 200px;
     align-items: center;
-  }
-  #flex-container div ,  #flex-container2 div{
+}
+
+#flex-container4 {
+    color: red;
+    font-size: xx-large;
+    text-align: center;
+}
+
+#flex-container3 {
+    justify-content: center !important;
+}
+
+input {
+    height: 60px;
+    width: 200px;
     background-color: #423e3e;
-    position : relative;
+    color: white;
+    border-radius: 5px;
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#flex-container div {
+    background-color: #423e3e;
+}
+
+#flex-container2 div {
+    background-color: #423e3e;
+}
+
+#flex-container div,
+#flex-container2 div {
+    border-style: solid;
+    border-color: black;
+    border-radius: 5px;
+    position: relative;
     color: white;
     width: 100px;
     height: 150px;
-  }
+}
 
-  #flex-container div>p{
-      display: none;
-      font-size: xx-large;
-      text-align: center;
-      text-transform: uppercase;
-  }
+#flex-container div>p {
+    font-size: xx-large;
+    text-align: center;
+    text-transform: uppercase;
+}
 
-  #flex-container2 div>p{
+#flex-container2 div>p {
     font-size: xx-large;
     text-align: center;
     text-transform: uppercase;

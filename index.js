@@ -76,6 +76,7 @@ let errorMessage = (msg) => {
 
 let subFunction = (e) => {
     e.preventDefault();
+    let goodLetters = 0
     console.log(containerWord);
     let numberOfChildren = containerWord.childElementCount;
     let childrenOfContainerWord = containerWord.childNodes;
@@ -94,17 +95,22 @@ let subFunction = (e) => {
                 errorMessage("badLetters");
                 break;
             } else {
-                let div = document.createElement("div");
-                let P = document.createElement("p");
-                P.innerHTML = "congratulation you win"
-                div.appendChild(P);
-                errorDiv.appendChild(div);
-                break;
+                goodLetters++
             }
         }
 
+
+
         //childrenOfChild.push(containerWord[i].childNodes)
         //console.log(containerWord[i]);
+    }
+
+    if (goodLetters == numberOfChildren) {
+        let div = document.createElement("div");
+        let P = document.createElement("p");
+        P.innerHTML = "congratulation you win"
+        div.appendChild(P);
+        errorDiv.appendChild(div);
     }
 
 

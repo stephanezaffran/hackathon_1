@@ -1,7 +1,6 @@
 let listWords = ["parent", "ananas", "talk", "elephant", "computer"]
 let wordToFind = listWords[Math.floor(Math.random() * listWords.length)]
 let form = document.querySelector('form')
-    //console.log(wordToFind);
 let sizeOfTheWord = wordToFind.length;
 let containerWord = document.querySelector("#flex-container");
 let containerCardsToMove = document.querySelector("#flex-container2");
@@ -15,20 +14,15 @@ let handleDragStart = (e) => {
     e.dataTransfer.setData("text/plain", e.target.id);
 }
 let handleDragOver = (e) => {
-
     e.preventDefault();
-
 }
 let reload = () => { window.location = "./game.html" }
 
 let handleDrop = (e) => {
-    // console.log("Drop");
     e.preventDefault();
     // Get the data, which is the id of the drop target
     let data = e.dataTransfer.getData("text");
     //move the elem on the destination 
-    //console.log("#" + data);
-    //console.log(document.querySelector("#" + data));
     e.target.appendChild(document.querySelector("#" + data));
     // Clear the drag data cache (for all formats/types)
     e.dataTransfer.clearData();
@@ -98,11 +92,7 @@ let subFunction = (e) => {
                 goodLetters++
             }
         }
-
-
-
-        //childrenOfChild.push(containerWord[i].childNodes)
-        //console.log(containerWord[i]);
+        ole.log(containerWord[i]);
     }
 
     if (goodLetters == numberOfChildren) {
@@ -112,13 +102,8 @@ let subFunction = (e) => {
         div.appendChild(P);
         errorDiv.appendChild(div);
     }
-
-
-
 }
 
 let mySubmit = form.addEventListener('submit', subFunction)
-
-
 
 arrangeTheCards();

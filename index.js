@@ -23,7 +23,7 @@ let handleDrop = (e) => {
     // Get the data, which is the id of the drop target
     let data = e.dataTransfer.getData("text");
     //move the elem on the destination 
-    e.target.appendChild(document.querySelector("#" + data));
+    e.target.appendChild(document.querySelector("#" + data)).style.backgroundColor = "slateblue";
     // Clear the drag data cache (for all formats/types)
     e.dataTransfer.clearData();
 }
@@ -34,7 +34,6 @@ let arrangeTheCards = () => {
 
         let myDiv = document.createElement("div");
         myDiv.setAttribute("id", `destinationItem${index}`);
-        myDiv.style.zIndex = "10";
         let myP = document.createElement("p");
         myP.style.display = "none"
         myP.innerHTML = wordToFind[index]
@@ -44,7 +43,6 @@ let arrangeTheCards = () => {
         myDiv2.draggable = true;
 
         myDiv2.setAttribute("id", `draggableItem${index}`);
-        myDiv2.style.zIndex = "100";
         let myP2 = document.createElement("p");
         myP2.innerHTML = shuffled[index]
         myDiv2.appendChild(myP2);
